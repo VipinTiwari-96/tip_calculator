@@ -7,7 +7,7 @@ import {dataContext} from "./context";
       children?: ReactNode
     }
 
-   export type Value= {amount:number, persons: number}
+   export type Value= {amount:number,service: string, persons: number}
 
 const DataProvider : FC<DataProviderProps> =({children}) =>{
     const[tip,  setTip]= useState("");
@@ -16,34 +16,42 @@ const DataProvider : FC<DataProviderProps> =({children}) =>{
 
     const schema= yup.object().shape({
     amount:yup.number().required().min(1),
-    persons: yup.number().required().min(1)
+    persons: yup.number().required().min(1),
+    service: yup.string().required()
    })
 
    const initialValues:Value={
     amount:0,
+    service:"",
     persons:0
    }
    
   const handleSubmit=(value:Value)=>{
-    if(tip==""){
-      setSelectError("select the tip...")
-      } 
-      else if(tip==TOP_NOTCH_SERVICE){
-              setPerManTip((value.amount*25/100)/value.persons);
-            }
-            else if(tip== EXCELLENT_SERVICE){
-              setPerManTip((value.amount*20/100)/value.persons);
-            }
-            else if(tip==GOOD_SERVICE){
-              setPerManTip((value.amount*15/100)/value.persons);
-            }
-            else if(tip==OK_OK_SERVICE){
-              setPerManTip((value.amount*10/100)/value.persons)
-            }
-            else if(tip==BAD_SERVICE){
-              setPerManTip((value.amount*5/100)/value.persons)
-            }
-  }
+      if(value.service != ''){
+        switch (value.service) {
+          case TOP_NOTCH_SERVICE:
+            setPerManTip((value.amount*25/100)/value.persons);
+            break;
+          
+          case EXCELLENT_SERVICE:
+            setPerManTip((value.amount*20/100)/value.persons);
+            break;
+
+          case GOOD_SERVICE:
+            setPerManTip((value.amount*15/100)/value.persons);
+            break;
+          
+          case OK_OK_SERVICE:
+            setPerManTip((value.amount*10/100)/value.persons);
+            break;
+          
+          case BAD_SERVICE:
+            setPerManTip((value.amount*5/100)/value.persons);
+            break;
+          default:
+            break;
+          }
+  }}
     
   return (<>
     <dataContext.Provider value={

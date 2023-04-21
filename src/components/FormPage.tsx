@@ -5,6 +5,7 @@ import TipsLevel from './TipsLevel';
 import {Formik, Form} from "formik";
 import { dataContext } from './provider/context';
 import { BAD_SERVICE, EXCELLENT_SERVICE, GOOD_SERVICE, OK_OK_SERVICE, TOP_NOTCH_SERVICE } from './TipsConstant';
+import Select from './Select';
 
     type FormProps={}
 
@@ -31,20 +32,19 @@ const FormPage: FC<FormProps> =() =>{
         <div className='sm:w-1/2'>
           <label htmlFor="service" className='text-sm sm:text-xl'>How was the service?</label>
          
-         <select  id="service" value={tip} onChange={(e)=> setTip(e.target.value)}
-            className={`w-2/3 sm:w-full text-gray-500 text-xs sm:text-sm lg:text-base font-normal 
-            border-b border-teal-400 outline-none 
-            focus:border p-2 ${tip !=="" && "bg-gray-100"}`}>
-           <option value="" >Select the tip...</option>
-           <option value={TOP_NOTCH_SERVICE}>25%- Top Notch </option>
-           <option value={EXCELLENT_SERVICE}>20%- Excellent</option>
-           <option value={GOOD_SERVICE}>15%- Good</option>
-           <option value={OK_OK_SERVICE}>10%- Ok Ok</option>
-           <option value={BAD_SERVICE}>5%- Bad</option>
-         </select>
-        {selectError!=="" && <div className='text-red-500 text-xs lg:text-sm'>{selectError}</div>} 
-        </div>
+         <Select  id="service" name="service"
+              className={`w-2/3 sm:w-full text-gray-500 text-xs sm:text-sm lg:text-base font-normal 
+              border-b border-teal-400 outline-none 
+              focus:border p-2 ${tip !=="" && "bg-gray-100"}`}>
+            <option value="" >Select the tip...</option>
+            <option value={TOP_NOTCH_SERVICE}>25%- Top Notch </option>
+            <option value={EXCELLENT_SERVICE}>20%- Excellent</option>
+            <option value={GOOD_SERVICE}>15%- Good</option>
+            <option value={OK_OK_SERVICE}>10%- Ok Ok</option>
+            <option value={BAD_SERVICE}>5%- Bad</option>
+         </Select>
 
+        </div>
            <TipsLevel tip={tip} />
       </div>
 
