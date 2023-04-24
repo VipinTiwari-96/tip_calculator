@@ -16,7 +16,7 @@ const FormPage: FC<FormProps> =() =>{
   return (
     <>
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={schema}  >
-      <Form className="bg-white mt-6 rounded-t-3xl px-6 pt-8 pb-32 ">
+      <Form className="bg-white my-6 rounded-t-3xl px-6 pt-8 pb-32 ">
       <div>
       <label htmlFor="amount" className='text-sm sm:text-xl '>Bill Amount</label>
         <div className='flex gap-2 w-2/3 sm:w-1/2'>
@@ -68,12 +68,13 @@ const FormPage: FC<FormProps> =() =>{
              }}> Reset</button>
     </div>
       
-      {perManTip>0? <div className='text-center mt-10 '>
-          <h2 className='sm:text-2xl '>Tip Amount</h2>
-           <div className=' sm:text-lg mt-2'>{perManTip}&#8377; each</div>
-        </div>: <div className='text-center mt-10 '>Liked our service? Then it's goot to give some tips...</div>}
         </Form>
    </Formik> 
+
+   {perManTip>0? <div className='text-center bg-orange-400 text-white rounded-b-3xl '>
+          <h2 className='sm:text-2xl '>Tip Amount</h2>
+           <div className=' sm:text-lg'>{perManTip}&#8377; each </div>
+        </div>: <div className='text-center py-4 bg-orange-400 text-white rounded-b-3xl '>Liked our service? Then it's good to give some tips...</div>}
  </> )
 }
 
