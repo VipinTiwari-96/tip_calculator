@@ -27,6 +27,7 @@ const DataProvider : FC<DataProviderProps> =({children}) =>{
    }
    
   const handleSubmit=(value:Value)=>{
+    setTip(value.service)
       if(value.service != ''){
         switch (value.service) {
           case TOP_NOTCH_SERVICE:
